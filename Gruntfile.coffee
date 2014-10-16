@@ -31,4 +31,4 @@ module.exports = (grunt) ->
 
 
   grunt.registerTask "run", ["develop", "watch"]
-  grunt.registerTask "default", ["mochaTest:requests"]
+  grunt.registerTask "default", ["run"]
