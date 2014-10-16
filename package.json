@@ -1,0 +1,35 @@
+{
+  "name": "node-eduit-server",
+  "version": "0.1.0",
+  "description": "REST server for EDU-IT project",
+  "main": "main.js",
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.8.2",
+    "cors": "^2.4.2",
+    "express": "^4.9.0",
+    "node-dhcp-rest-conf": "git+https://github.com/vencax/node-dhcp-rest-conf.git"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.8.0",
+    "grunt": "~0.4.1",
+    "grunt-cli": "*",
+    "grunt-coffeelint": "0.0.8",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-coffee": "~0.6.4",
+    "grunt-contrib-connect": "~0.2.0",
+    "grunt-contrib-copy": "~0.4.0",
+    "grunt-contrib-livereload": "~0.1.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-develop": "~0.3.0",
+    "grunt-exec": "^0.4.6",
+    "grunt-mocha-test": "~0.8.1"
+  },
+  "scripts": {
+    "start": "export NODE_ENV=production && node main.js"
+  },
+  "author": "Vaclav Klecanda",
+  "license": "MIT"
+}
