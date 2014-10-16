@@ -36,4 +36,4 @@ if ('FRONTEND_APP' in process.env) {
   });
 }
 
-exports.app = app;
+module.exports = app;
