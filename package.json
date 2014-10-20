@@ -10,7 +10,12 @@
     "body-parser": "^1.8.2",
     "cors": "^2.4.2",
     "express": "^4.9.0",
-    "node-dhcp-rest-conf": "git+https://github.com/vencax/node-dhcp-rest-conf.git"
+    "express-jwt": "^0.4.0",
+    "jsonwebtoken": "^1.1.2",
+    "mysql": "^2.5.2",
+    "node-dhcp-rest-conf": "git+https://github.com/vencax/node-dhcp-rest-conf.git",
+    "pbkdf2-sha256": "^1.0.1",
+    "sequelize": "^2.0.0-rc2"
   },
   "devDependencies": {
     "coffee-script": "^1.8.0",
