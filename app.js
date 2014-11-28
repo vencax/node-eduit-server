@@ -2,41 +2,35 @@ var express = require('express')
   , bodyParser = require('body-parser')
   , app = express();
 
-// create API app -------------------------------------------------------------
 
-var api = express();
+module.exports = function(db, sendMail, cb) {
 
-api.post('/login', require('./auth.js'));
+  var authapp = express();
+  authapp.post('/login', require('./auth.js'));
+  app.use('/auth', authapp);
 
-var expressJwt = require('express-jwt');
+  // create API app ------------------------------------------------------------
 
-// We are going to protect /api routes with JWT
-api.use(expressJwt({secret: process.env.SERVER_SECRET}));
+  var api = express();
 
-if (! ('FRONTEND_APP' in process.env)) {
-  api.use(require('cors')({maxAge: 86400}));
-}
+  var expressJwt = require('express-jwt');
 
-api.use('/dhcpdcfg', require('node-dhcp-rest-conf'))
+  // We are going to protect /api routes with JWT
+  api.use(expressJwt({secret: process.env.SERVER_SECRET}));
 
-// create main app ------------------------------------------------------------
+  api.use('/dhcpdcfg', require('node-dhcp-rest-conf'));
 
-if ('FRONTEND_APP' in process.env) {
-  // mount angular frontend -> no need for CORS
-  console.log("mounting angular frontend ...");
-  app.use(express.static(process.env.FRONTEND_APP));
-}
+  // create main app -----------------------------------------------------------
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.json());
 
-var prefix = '/api';
-app.use(prefix, api);
+  var prefix = '/api';
+  app.use(prefix, api);
 
-if ('FRONTEND_APP' in process.env) {
-  app.get('*', function(req, res) {
-    res.sendfile(process.env.FRONTEND_APP + '/index.html');
+  require('lineman-express')(app, express.static, function(err) {
+    if(err) { return cb(err); }
+
+    return cb(null, app);
   });
-}
-
-module.exports = app;
+};
