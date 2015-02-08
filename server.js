@@ -1,4 +1,6 @@
 
+require('coffee-script/register');
+
 var port = process.env.PORT || 8080;
 var sendMail = null;
 
@@ -13,11 +15,11 @@ var transporter = nodemailer.createTransport(smtpTransport({
 
 sendMail = function(data, cb) {
   console.log(data);
-  transporter.sendMail(data, cb);
+  // transporter.sendMail(data, cb);
 };
 
 var modelModules = [
-  // require('./models')
+  require('./models')
 ];
 
 require('./db').init(modelModules, function(err, sequelize) {
